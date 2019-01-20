@@ -1,0 +1,4 @@
+name: ProtocolSupportAccountsLinkBungee
+version: ${project.version}
+main: support.protocol.accountslink.AccountsLink
+depend: [ProtocolSupportBungee]
