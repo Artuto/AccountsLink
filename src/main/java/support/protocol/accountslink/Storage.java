@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class Storage
 {
-    protected final Map<UUID, Set<UUID>> altAccounts = new HashMap<>();
-    protected final Map<UUID, UUID> mainAccountByAltAccountUUID = new HashMap<>();
-    protected final Object lock = new Object();
+    private final Map<UUID, Set<UUID>> altAccounts = new HashMap<>();
+    private final Map<UUID, UUID> mainAccountByAltAccountUUID = new HashMap<>();
+    private final Object lock = new Object();
 
-    public Optional<UUID> getMainAccount(UUID altAccountUUID)
+    Optional<UUID> getMainAccount(UUID altAccountUUID)
     {
         synchronized(lock)
         {
@@ -20,7 +20,7 @@ public class Storage
         }
     }
 
-    public void addAltAccount(UUID mainAccountUUID, UUID altAccountUUID)
+    void addAltAccount(UUID mainAccountUUID, UUID altAccountUUID)
     {
         synchronized(lock)
         {
@@ -60,7 +60,7 @@ public class Storage
         }
     }
 
-    public void load(Configuration config)
+    void load(Configuration config)
     {
         synchronized(lock)
         {
@@ -73,7 +73,7 @@ public class Storage
         }
     }
 
-    public void save(Configuration config)
+    void save(Configuration config)
     {
         altAccounts.entrySet()
                 .forEach(entry -> config.set(entry.getKey().toString(), entry.getValue().stream().map(UUID::toString)

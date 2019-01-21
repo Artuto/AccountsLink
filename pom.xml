@@ -72,8 +72,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.ProtocolSupport</groupId>
-            <artifactId>ProtocolSupport</artifactId>
-            <version>73866eafb0</version>
+            <artifactId>ProtocolSupportBungee</artifactId>
+            <version>6718e7dee8</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
