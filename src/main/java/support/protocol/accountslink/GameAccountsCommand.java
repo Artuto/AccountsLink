@@ -13,16 +13,14 @@ import java.util.concurrent.TimeUnit;
 public class GameAccountsCommand extends Command
 {
     private final AccountsLink plugin;
-    private final Storage storage;
 
     private final HashMap<String, UUID> codeToUUID = new HashMap<>();
     private final HashMap<UUID, String> uuidToCode = new HashMap<>();
 
-    GameAccountsCommand(AccountsLink plugin, Storage storage)
+    GameAccountsCommand(AccountsLink plugin)
     {
         super("accountslink");
         this.plugin = plugin;
-        this.storage = storage;
     }
 
     @Override
@@ -66,16 +64,23 @@ public class GameAccountsCommand extends Command
                         sender.sendMessage(new TextComponent(ChatColor.DARK_RED + "This code is invalid"));
                     else
                     {
-                        try
-                        {
-                            storage.addAltAccount(mainAccountUUID, player.getUniqueId());
-                            removeCode(mainAccountUUID);
-                            sender.sendMessage(new TextComponent(ChatColor.GREEN + "Alt account added, you can now relog"));
-                        }
-                        catch(Exception e)
-                        {
-                            sender.sendMessage(new TextComponent(ChatColor.DARK_RED + "Unable to add alt account: " + e.getMessage()));
-                        }
+                        plugin.getProxy().getScheduler().runAsync(plugin, () -> {
+                            if(plugin.getDatabase().isLinked(mainAccountUUID.toString()))
+                                sender.sendMessage(new TextComponent(ChatColor.RED + "This account is already linked!"));
+                            else
+                            {
+                                int status = plugin.getDatabase().linkAccounts(mainAccountUUID, player.getUniqueId());
+
+                                if(status == 0)
+                                    sender.sendMessage(new TextComponent(ChatColor.RED + "Unknown error occurred"));
+                                else if(status == 1)
+                                    sender.sendMessage(new TextComponent(ChatColor.GREEN + "Alt account added, you can now relog"));
+                                else if(status == -1)
+                                    sender.sendMessage(new TextComponent(ChatColor.RED + "An error occurred while saving to the database."));
+
+                                removeCode(mainAccountUUID);
+                            }
+                        });
                     }
                 }
                 break;

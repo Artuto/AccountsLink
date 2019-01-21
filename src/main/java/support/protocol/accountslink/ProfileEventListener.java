@@ -6,17 +6,17 @@ import protocolsupport.api.events.PlayerProfileCompleteEvent;
 
 public class ProfileEventListener implements Listener
 {
-    protected final Storage storage;
+    private final AccountsLink plugin;
 
-    public ProfileEventListener(Storage storage)
+    ProfileEventListener(AccountsLink plugin)
     {
-        this.storage = storage;
+        this.plugin = plugin;
     }
 
     @EventHandler
     public void onProfileComplete(PlayerProfileCompleteEvent event)
     {
-        storage.getMainAccount(event.getForcedUUID() != null ? event.getForcedUUID() : event.getConnection().getProfile().getUUID())
+        plugin.getDatabase().getMainAccount(event.getForcedUUID() != null ? event.getForcedUUID() : event.getConnection().getProfile().getUUID())
                 .ifPresent(event::setForcedUUID);
     }
 }
