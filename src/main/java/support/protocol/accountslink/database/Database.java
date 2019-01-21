@@ -144,7 +144,7 @@ public class Database
         {
             conn = pool.getConnection();
             PreparedStatement statement = conn.prepareStatement("CREATE TABLE IF NOT EXISTS `accountslink`" +
-                            "(java_uuid varchar(50) NOT NULL UNIQUE PRIMARY KEY, bedrock_uuid varchar(50) NOT NULL UNIQUE)",
+                            "(main_uuid varchar(50) NOT NULL UNIQUE PRIMARY KEY, secondary_uuid varchar(50) NOT NULL UNIQUE)",
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             statement.closeOnCompletion();
