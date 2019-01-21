@@ -60,14 +60,22 @@ public class AccountsLink extends Plugin
             try
             {
                 file.createNewFile();
-                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
             }
             catch(IOException e)
             {
                 getLogger().severe("Could not create storage file");
                 e.printStackTrace();
-                onDisable();
             }
+        }
+
+        try
+        {
+            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
+        }
+        catch(IOException e)
+        {
+            getLogger().severe("Could not load storage file");
+            e.printStackTrace();
         }
 
         return config;
