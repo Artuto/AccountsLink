@@ -76,7 +76,7 @@ public class Database
                     results.updateString("secondary_uuid", secondary.toString());
                     results.insertRow();
 
-                    plugin.accounts.put(main, secondary);
+                    plugin.accounts.put(secondary, main);
                     return 1;
                 }
 
@@ -123,7 +123,7 @@ public class Database
                         UUID main = UUID.fromString(results.getString("main_uuid"));
                         UUID secondary = UUID.fromString(results.getString("secondary_uuid"));
 
-                        plugin.accounts.put(main, secondary);
+                        plugin.accounts.put(secondary, main);
                     }
                 }
             }
