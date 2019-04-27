@@ -1,2 +1,2 @@
-# PSALBungee
-ProtocolSupport AccountsLink for Bungee
+# AccountsLinkBungee
+Link two minecraft accounts with ease
