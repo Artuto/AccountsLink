@@ -4,18 +4,50 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>support.protocol.accountslink</groupId>
-    <artifactId>ProtocolSupportAccountsLinkBungee</artifactId>
-    <version>1.1.1</version>
+    <groupId>tk.artuto.accountslink</groupId>
+    <artifactId>AccountsLinkBungee</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>ProtocolSupportAccountsLinkBungee</name>
+    <name>AccountsLinkBungee</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+	
+	<repositories>
+        <repository>
+            <id>sonatype-oss-repo</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+    </repositories>
 
-    <build>
+    <dependencies>
+        <dependency>
+            <groupId>tk.liblnd.waterland</groupId>
+            <artifactId>waterland</artifactId>
+            <version>1.14-SNAPSHOT</version>
+            <systemPath>${project.basedir}/libs/waterland-1.jar</systemPath>
+            <type>jar</type>
+            <scope>system</scope>
+        </dependency>
+
+        <!-- MySQL -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.7.8</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+            <scope>provided</scope> <!-- BungeeCord provides MySQL JDBC -->
+        </dependency>
+    </dependencies>
+	
+	<build>
+		<finalName>AccountsLinkBungee</finalName>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
@@ -51,42 +83,4 @@
             </resource>
         </resources>
     </build>
-
-    <repositories>
-        <repository>
-            <id>sonatype-oss-repo</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.13-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.ProtocolSupport</groupId>
-            <artifactId>ProtocolSupportBungee</artifactId>
-            <version>6718e7dee8</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- MySQL -->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>2.7.8</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.13</version>
-        </dependency>
-    </dependencies>
 </project>

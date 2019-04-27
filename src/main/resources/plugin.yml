@@ -1,5 +1,4 @@
-name: ProtocolSupportAccountsLinkBungee
+name: AccountsLinkBungee
 version: ${project.version}
 author: Artuto
-main: support.protocol.accountslink.AccountsLink
-depend: [ProtocolSupportBungee]
+main: tk.artuto.accountslink.AccountsLink
