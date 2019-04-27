@@ -64,7 +64,7 @@ class ConnectionPoolManager
         config.setDriverClassName("com.mysql.jdbc.Driver");
         config.setUsername(user);
         config.setPassword(password);
-        config.setPoolName("PSALB-Pool");
+        config.setPoolName("ALB-Pool");
         setupDefaults(config);
 
         hds = new HikariDataSource(config);
