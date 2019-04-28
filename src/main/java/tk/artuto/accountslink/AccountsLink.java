@@ -36,16 +36,7 @@ public class AccountsLink extends Plugin
 
         initDatabase();
 
-        try
-        {
-            getProxy().getPluginManager().registerListener(this, new ProfileEventListener(this));
-        }
-        catch(NoSuchFieldException e)
-        {
-            onDisable();
-            e.printStackTrace();
-        }
-
+        getProxy().getPluginManager().registerListener(this, new IdentityManagementListener(this));
         getProxy().getPluginManager().registerCommand(this, new GameAccountsCommand(this));
 
         LOG.info(ChatColor.GREEN + "Enabled " + pluginTag);
@@ -56,7 +47,7 @@ public class AccountsLink extends Plugin
     {
         LOG.info("Disabling " + pluginTag + "...");
 
-        if(!(getDatabase()==null))
+        if(!(getDatabase() == null))
             getDatabase().shutdown();
     }
 

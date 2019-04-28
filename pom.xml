@@ -17,19 +17,20 @@
 	
 	<repositories>
         <repository>
-            <id>sonatype-oss-repo</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <id>libertyland-snapshots</id>
+            <url>https://nexus.artuto.tk/repository/maven-snapshots/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>tk.liblnd.waterland</groupId>
-            <artifactId>waterland</artifactId>
+            <artifactId>waterland-api</artifactId>
             <version>1.14-SNAPSHOT</version>
-            <systemPath>${project.basedir}/libs/waterland-1.jar</systemPath>
+            <scope>provided</scope>
+            <!--<systemPath>${project.basedir}/libs/waterland-1.jar</systemPath>
             <type>jar</type>
-            <scope>system</scope>
+            <scope>system</scope>-->
         </dependency>
 
         <!-- MySQL -->
