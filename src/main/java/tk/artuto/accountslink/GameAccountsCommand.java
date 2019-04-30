@@ -28,7 +28,7 @@ public class GameAccountsCommand extends Command
     {
         if(args.length < 1)
         {
-            sender.sendMessage(new TextComponent(ChatColor.GREEN + "ProtocolSupportAccountsLinkBungee\n" +
+            sender.sendMessage(new TextComponent(ChatColor.GREEN + "AccountsLinkBungee\n" +
                     ChatColor.YELLOW + "/accountslink code " + ChatColor.RESET + "- Get linking code for this account\n" +
                     ChatColor.YELLOW + "/accountslink link " + ChatColor.RESET + "- Link this account using a code."));
 
@@ -47,7 +47,7 @@ public class GameAccountsCommand extends Command
         {
             case "code":
             {
-                player.sendMessage(new TextComponent("Use this code for linking alts to this account, code is valid for 2 minutes: "
+                player.sendMessage(new TextComponent("Use this code for linking alts to this account, code is valid for 5 minutes: "
                         + generateCode(player.getUniqueId())));
                 break;
             }
@@ -84,6 +84,7 @@ public class GameAccountsCommand extends Command
                         });
                     }
                 }
+				
                 break;
             }
         }
@@ -102,7 +103,7 @@ public class GameAccountsCommand extends Command
         String randomCode = Utils.generateRandomString(10);
         uuidToCode.put(uuid, randomCode);
         codeToUUID.put(randomCode, uuid);
-        plugin.getProxy().getScheduler().schedule(plugin, () -> removeCode(uuid), TimeUnit.MINUTES.toSeconds(2) * 20, TimeUnit.SECONDS);
+        plugin.getProxy().getScheduler().schedule(plugin, () -> removeCode(uuid), TimeUnit.MINUTES.toSeconds(5), TimeUnit.SECONDS);
         return randomCode;
     }
 }

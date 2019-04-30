@@ -16,11 +16,11 @@ public class IdentityManagementListener implements Listener
     @EventHandler
     public void onIdentityManagement(IdentityManagementEvent event)
     {
-        /*event.registerIntent(plugin);
+        event.registerIntent(plugin);
         plugin.getProxy().getScheduler().runAsync(plugin, () ->
-        {*/
+        {
             plugin.getDatabase().getMainAccount(event.getUuid()).ifPresent(event::setUuid);
-            /*event.completeIntent(plugin);
-        });*/
+            event.completeIntent(plugin);
+        });
     }
 }

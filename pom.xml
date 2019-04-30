@@ -6,7 +6,7 @@
 
     <groupId>tk.artuto.accountslink</groupId>
     <artifactId>AccountsLinkBungee</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <packaging>jar</packaging>
 
     <name>AccountsLinkBungee</name>
@@ -23,16 +23,22 @@
     </repositories>
 
     <dependencies>
+		<!-- BungeeCord -->
         <dependency>
             <groupId>tk.liblnd.waterland</groupId>
             <artifactId>waterland-api</artifactId>
             <version>1.14-SNAPSHOT</version>
             <scope>provided</scope>
-            <!--<systemPath>${project.basedir}/libs/waterland-1.jar</systemPath>
-            <type>jar</type>
-            <scope>system</scope>-->
         </dependency>
-
+		
+		<!-- PSB -->
+		<dependency>	
+            <groupId>com.github.ProtocolSupport</groupId>	
+            <artifactId>ProtocolSupportBungee</artifactId>	
+            <version>6718e7dee8</version>	
+            <scope>provided</scope>	
+        </dependency>
+		
         <!-- MySQL -->
         <dependency>
             <groupId>com.zaxxer</groupId>

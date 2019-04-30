@@ -18,6 +18,9 @@ public class AccountsLink extends Plugin
     private Config config;
     private Database db;
     private String pluginTag;
+	
+	private boolean waterdog;
+	private boolean psb;
 
     @Override
     public void onEnable()
@@ -26,18 +29,43 @@ public class AccountsLink extends Plugin
         this.pluginTag = getDescription().getName() + " " + getDescription().getVersion();
 
         LOG.info("Enabling " + pluginTag + "...");
+		
+		if(detectWaterdog())
+		{
+			this.waterdog = true;
+			getLogger().info("Detected Waterdog - Using IdentityManagementEvent to rewrite UUIDs.");
+		}
+		else if(detectPSB())
+		{
+			this.psb = true;
+			getLogger().info("Detected ProtocolSupportBungee - Using PlayerProfileCompleteEvent to rewrite UUIDs.");
+			getLogger().warning("WARNING Waterdog is recommended over ProtocolSupportBungee as it is more stable for PE Protocols WARNING");
+		}
+		else
+		{
+			getLogger().severe("This server is not running a supported platform!");
+			throw new IllegalStateException();
+			onDisable();
+			return;
+		}
 
         try {this.config = new Config(this);}
         catch(IOException e)
         {
             LOG.severe(ChatColor.RED + "Error while loading the config file: " + e.getMessage());
             e.printStackTrace();
+			onDisable();
+			return;
         }
 
         initDatabase();
-
-        getProxy().getPluginManager().registerListener(this, new IdentityManagementListener(this));
-        getProxy().getPluginManager().registerCommand(this, new GameAccountsCommand(this));
+		
+		if(waterdog)
+			getProxy().getPluginManager().registerListener(this, new IdentityManagementListener(this));
+		else if(psb)
+			getProxy().getPluginManager().registerListener(this, new PlayerProfileCompleteListener(this));			
+		
+		getProxy().getPluginManager().registerCommand(this, new GameAccountsCommand(this));
 
         LOG.info(ChatColor.GREEN + "Enabled " + pluginTag);
     }
@@ -50,6 +78,24 @@ public class AccountsLink extends Plugin
         if(!(getDatabase() == null))
             getDatabase().shutdown();
     }
+	
+	private boolean detectWaterdog()
+	{
+		try
+        {
+            Class.forName("network.ycc.waterdog.api.event.IdentityManagementEvent");
+            return true;
+        }
+        catch(ClassNotFoundException ignored)
+        {
+            return false;
+        }
+	}
+	
+	private boolean detectPSB()
+	{
+		return !(getProxy().getPluginManager().getPlugin("ProtocolSupportBungee") == null);
+	}
 
     private void initDatabase()
     {
