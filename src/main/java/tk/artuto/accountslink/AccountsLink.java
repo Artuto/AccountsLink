@@ -45,8 +45,6 @@ public class AccountsLink extends Plugin
 		{
 			getLogger().severe("This server is not running a supported platform!");
 			throw new IllegalStateException();
-			onDisable();
-			return;
 		}
 
         try {this.config = new Config(this);}
