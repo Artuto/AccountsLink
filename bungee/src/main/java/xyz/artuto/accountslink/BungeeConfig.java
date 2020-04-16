@@ -24,8 +24,7 @@ public class BungeeConfig implements Config
         if(!(file.exists()))
         {
             try(InputStream stream = plugin.getResourceAsStream("config.yml"))
-            {
-                Files.copy(stream, file.toPath());}
+            {Files.copy(stream, file.toPath());}
             catch(IOException e)
             {
                 plugin.getLogger().severe("Could not load config file: " + e.getMessage());

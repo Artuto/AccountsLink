@@ -71,7 +71,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>co.aikar.idb</pattern>
-                                    <shadedPattern>xyz.artuto.accountslink.common.libs</shadedPattern>
+                                    <shadedPattern>xyz.artuto.accountslink.common.libs.idb</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
