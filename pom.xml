@@ -4,92 +4,46 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.artuto.accountslink</groupId>
-    <artifactId>AccountsLinkBungee</artifactId>
-    <version>2.1.0</version>
-    <packaging>jar</packaging>
+    <groupId>xyz.artuto.accountslink</groupId>
+    <artifactId>accountslink</artifactId>
+    <version>3.0.0</version>
 
-    <name>AccountsLinkBungee</name>
+    <packaging>pom</packaging>
+
+    <name>AccountsLink</name>
+    <url>https://artuto.xyz</url>
+
+    <modules>
+        <module>common</module>
+        <module>protocolsupport-bungee</module>
+        <module>waterland</module>
+        <module>bungee</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 	
-	<repositories>
-        <repository>
-            <id>libertyland-snapshots</id>
-            <url>https://nexus.artuto.tk/repository/maven-snapshots/</url>
-        </repository>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-    </repositories>
-
-    <dependencies>
-		<!-- BungeeCord -->
-        <dependency>
-            <groupId>tk.liblnd.waterland</groupId>
-            <artifactId>waterland-api</artifactId>
-            <version>1.14-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-		
-		<!-- PSB -->
-		<dependency>	
-            <groupId>com.github.ProtocolSupport</groupId>	
-            <artifactId>ProtocolSupportBungee</artifactId>	
-            <version>6718e7dee8</version>	
-            <scope>provided</scope>	
-        </dependency>
-		
-        <!-- MySQL -->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>2.7.8</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
-            <scope>provided</scope> <!-- BungeeCord provides MySQL JDBC -->
-        </dependency>
-    </dependencies>
-	
 	<build>
-		<finalName>AccountsLinkBungee</finalName>
+		<finalName>${project.name}-${project.version}</finalName>
         <defaultGoal>clean package</defaultGoal>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
+
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <minimizeJar>true</minimizeJar>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
+
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>waterland/src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>

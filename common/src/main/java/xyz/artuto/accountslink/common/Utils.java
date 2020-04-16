@@ -1,13 +1,13 @@
-package tk.artuto.accountslink;
+package xyz.artuto.accountslink.common;
 
 import java.security.SecureRandom;
 
-class Utils
+public class Utils
 {
     private static final String random_str_symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static SecureRandom rnd = new SecureRandom();
 
-    static String generateRandomString(int len)
+    public static String generateRandomString(int len)
     {
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++)

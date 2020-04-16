@@ -1,19 +1,20 @@
-package tk.artuto.accountslink;
+package xyz.artuto.accountslink;
 
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import xyz.artuto.accountslink.common.Config;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-public class Config
+public class BungeeConfig implements Config
 {
     private final Configuration config;
 
-    Config(AccountsLink plugin) throws IOException
+    BungeeConfig(AccountsLinkBungee plugin) throws IOException
     {
         File dataFolder = plugin.getDataFolder();
         File file = new File(dataFolder, "config.yml");
@@ -35,42 +36,50 @@ public class Config
         this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
     }
 
+    @Override
     public boolean autoReconnect()
     {
         return config.getBoolean("autoReconnect");
     }
 
+    @Override
     public boolean useSSL()
     {
         return config.getBoolean("useSSL");
     }
 
+    @Override
     public boolean verifyServerCertificate()
     {
         return config.getBoolean("verifyServerCertificate");
     }
 
+    @Override
     public int getPort()
     {
         return config.getInt("port");
     }
 
+    @Override
     public String getDatabaseHost()
     {
         return config.getString("host");
     }
 
+    @Override
     public String getDatabaseUser()
     {
         return config.getString("user");
     }
 
+    @Override
     public String getDatabasePassword()
     {
         return config.getString("password");
     }
 
-    public String getDatabaseName()
+    @Override
+    public String getDatabase()
     {
         return config.getString("database");
     }

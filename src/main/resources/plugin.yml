@@ -1,4 +1,0 @@
-name: AccountsLinkBungee
-version: ${project.version}
-author: Artuto
-main: tk.artuto.accountslink.AccountsLink

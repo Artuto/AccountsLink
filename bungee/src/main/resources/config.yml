@@ -4,6 +4,6 @@ user: ''
 password: ''
 database: ''
 
-useSSL: true
+useSSL: false
 verifyServerCertificate: false
 autoReconnect: true

@@ -1,0 +1,4 @@
+name: AccountsLink
+version: ${project.version}
+author: Artuto
+main: xyz.artuto.accountslink.AccountsLinkBungee
