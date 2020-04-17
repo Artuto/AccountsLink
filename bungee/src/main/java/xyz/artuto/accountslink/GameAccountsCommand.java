@@ -86,7 +86,10 @@ public class GameAccountsCommand extends Command
 
         boolean result = plugin.getDataManager().linkAccounts(mainAccountUUID, player.getUniqueId());
         if(result)
+        {
             player.sendMessage(new TextComponent(ChatColor.GREEN + "Alt account added, you can now relog"));
+            plugin.getDataManager().removeUser(player.getUniqueId());
+        }
         else
             player.sendMessage(new TextComponent(ChatColor.RED + "Unknown error occurred, contact an Admin."));
 

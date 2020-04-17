@@ -70,6 +70,11 @@
 
                             <relocations>
                                 <relocation>
+                                    <pattern>com.zaxxer.hikari</pattern>
+                                    <shadedPattern>xyz.artuto.accountslink.common.libs.hikari</shadedPattern>
+                                </relocation>
+
+                                <relocation>
                                     <pattern>co.aikar.idb</pattern>
                                     <shadedPattern>xyz.artuto.accountslink.common.libs.idb</shadedPattern>
                                 </relocation>

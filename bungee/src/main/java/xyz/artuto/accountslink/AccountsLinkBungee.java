@@ -47,8 +47,9 @@ public class AccountsLinkBungee extends Plugin implements AccountsLink<Plugin>
 			getProxy().getPluginManager().registerListener(this, new IdentityManagementListener(this));
 		else
 			getProxy().getPluginManager().registerListener(this, new PlayerProfileCompleteListener(this));
-		
-		getProxy().getPluginManager().registerCommand(this, new GameAccountsCommand(this));
+
+        getProxy().getPluginManager().registerListener(this, new UsernameUpdaterListener(this));
+        getProxy().getPluginManager().registerCommand(this, new GameAccountsCommand(this));
     }
 
     @Override

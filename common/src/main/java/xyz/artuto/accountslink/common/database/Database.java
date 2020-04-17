@@ -43,6 +43,20 @@ public class Database
         }
     }
 
+    boolean doUpdate(@Language("MySQL") String query, Object... params)
+    {
+        try
+        {
+            DB.executeUpdate(query, params);
+            return true;
+        }
+        catch(Exception e)
+        {
+            logger.log(SEVERE, "Exception while updating the database:", e);
+            return false;
+        }
+    }
+
     Optional<DbRow> getRow(@Language("MySQL") String query, Object... params)
     {
         DbRow row;
@@ -92,7 +106,7 @@ public class Database
         try
         {
             DB.executeUpdate("CREATE TABLE IF NOT EXISTS `accountslink` (main_uuid varchar(50) NOT NULL UNIQUE " +
-                    "PRIMARY KEY, secondary_uuid varchar(50) NOT NULL UNIQUE, username NOT NULL)");
+                    "PRIMARY KEY, secondary_uuid varchar(50) NULL UNIQUE, username varchar(18) NOT NULL)");
         }
         catch(SQLException e) {throw new RuntimeException("Error while setting up database tables:", e);}
     }
